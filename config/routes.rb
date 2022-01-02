@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
   resources :hotels do 
-    resources :rooms, only: %i[create destroy]
+    resources :rooms
   end
 
   root 'hotels#index'

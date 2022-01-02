@@ -58,6 +58,7 @@ class HotelsController < ApplicationController
     params.require(:hotel).permit(:title, :stars)
   end
 
+
   def find_hotel!
     @hotel = Hotel.find params[:id]
   end

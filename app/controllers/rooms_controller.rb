@@ -1,9 +1,30 @@
 class RoomsController < ApplicationController
 
   before_action :find_hotel!
+  
+
+  def update
+    @room = @hotel.rooms.find params[:id]
+    if @room.update room_params
+      flash[:success] = "Room saved"
+      redirect_to hotels_path(@hotel)
+    else
+      render :edit
+    end
+  end
+
+
+  def edit
+    @room = @hotel.rooms.find params[:id]
+  end
+
+
+  def new
+    @room = @hotel.rooms.build
+  end
+
 
   def create
-    # render plain: params
     @room = @hotel.rooms.build room_params
     if @room.save
       flash[:success] = "Room created!"
@@ -29,5 +50,9 @@ class RoomsController < ApplicationController
 
   def find_hotel!
     @hotel = Hotel.find params[:hotel_id]
+  end
+
+  def find_room!
+    @room = @hotel.rooms.find params[:id]
   end
 end

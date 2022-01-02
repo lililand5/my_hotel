@@ -24,130 +24,30 @@
 
 <%= render 'shared/errors', object: @room %>
 
-<%= form_with model: [@hotel, @room] do |f| %>
-
-<div class="mb-3 row">
-  <div class="col-sm-2 col-form-label">
-    <%= f.label :room_type %>
-  </div>
-
-  <div class="col-sm-10">
-    <%= f.text_field :room_type, class: 'form-control' %>
-  </div>
-</div>
+<%= link_to 'Create room', new_hotel_room_path(@hotel), class: 'btn btn-secondary' %>
 
 
-<div class="mb-3 row">
-  <div class="col-sm-2 col-form-label">
-    <%= f.label :link_img %>
-  </div>
+<h2 class="mt-5">Rooms</h2>
 
-  <div class="col-sm-10">
-    <%= f.text_field :link_img, class: 'form-control' %>
-  </div>
-</div>
-
-
-<div class="mb-3 row">
-  <div class="col-sm-2 col-form-label">
-    <%= f.label :price_per_night %>
-  </div>
-
-  <div class="col-sm-10">
-    <%= f.text_field :price_per_night, class: 'form-control' %>
-  </div>
-</div>
-
-
-<div class="mb-3 row">
-  <div class="col-sm-2 col-form-label">
-    <%= f.label :bed_type %>
-  </div>
-
-  <div class="col-sm-10">
-    <%= f.text_field :bed_type, class: 'form-control' %>
-  </div>
-</div>
-
-
-<div class="mb-3 row">
-  <div class="col-sm-2 col-form-label">
-    <%= f.label :number_of_people %>
-  </div>
-
-  <div class="col-sm-10">
-    <%= f.text_field :number_of_people, class: 'form-control' %>
-  </div>
-</div>
-
-
-<div class="mb-3 row">
-  <div class="col-sm-2 col-form-label">
-    <%= f.label :booking_type %>
-  </div>
-
-  <div class="col-sm-10">
-    <%= f.text_field :booking_type, class: 'form-control' %>
-  </div>
-</div>
-
-
-<div class="mb-3 row">
-  <div class="col-sm-2 col-form-label">
-    <%= f.label :number_of_beds %>
-  </div>
-
-  <div class="col-sm-10">
-    <%= f.text_field :number_of_beds, class: 'form-control' %>
-  </div>
-</div>
-
-
-
-<div class="mb-3 row">
-  <div class="col-sm-2 col-form-label">
-    <%= f.label :food %>
-  </div>
-
-  <div class="col-sm-10">
-    <%= f.text_field :food, class: 'form-control' %>
-  </div>
-</div>
-
-
-<div class="mb-3 row">
-  <div class="col-sm-2 col-form-label">
-    <%= f.label :comforts %>
-  </div>
-
-  <div class="col-sm-10">
-    <%= f.text_area :comforts, class: 'form-control' %>
-  </div>
-</div>
-
-
-<%= f.submit "Submit!", class: 'btn btn-primary' %>
-<% end %>
-
-
-
-<h2>Rooms</h2>
 <% @rooms.each do |room| %>
-<article class="mb-3">
-  <p><%= room.id %></p>
-  <p><%= room.room_type %></p>
-  <p><%= room.link_img %></p>
-  <p><%= room.price_per_night %></p>
-  <p><%= room.bed_type %></p>
-  <p><%= room.number_of_beds %></p>
-  <p><%= room.number_of_people %></p>
-  <p><%= room.booking_type %></p>
-  <p><%= room.food %></p>
-  <p><%= room.comforts %></p>
+<article class="mb-3 card">
+  <div class="card-body">
+    <section class="card-text">
+      <p class="mt-2 mb-3"><%= room.id %></p>
+      <p class="mt-2 mb-3"><%= room.room_type %></p>
+      <p class="mt-2 mb-3"><%= room.link_img %></p>
+      <p class="mt-2 mb-3"><%= room.price_per_night %></p>
+      <p class="mt-2 mb-3"><%= room.bed_type %></p>
+      <p class="mt-2 mb-3"><%= room.number_of_beds %></p>
+      <p class="mt-2 mb-3"><%= room.number_of_people %></p>
+      <p class="mt-2 mb-3"><%= room.booking_type %></p>
+      <p class="mt-2 mb-3"><%= room.food %></p>
+      <p class="mt-2 mb-3"><%= room.comforts %></p>
+    </section>
+    <%=link_to 'Edit', edit_hotel_room_path(@hotel, room), class: 'btn btn-info btn-sm' %>
+    <%=link_to 'Delete', hotel_room_path(@hotel, room), class: 'btn btn-danger btn-sm', data: {method: :delete, confirm: "Are you sure"} %>
+  </div>
 </article>
-  
-
-  <%=link_to 'Delete', hotel_room_path(@hotel, room), class: 'btn btn-danger btn-sm', data: {method: :delete, confirm: "Are you sure"} %>
 <% end %>
 
 
