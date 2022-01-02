@@ -9,7 +9,7 @@ class RoomsController < ApplicationController
       flash[:success] = "Room created!"
       redirect_to hotel_path(@hotel)
     else
-      @rooms = Room.order created_at: :desc
+      @rooms = @hotel.rooms.order created_at: :desc
       render 'hotels/show'
     end
   end

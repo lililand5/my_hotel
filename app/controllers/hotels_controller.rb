@@ -19,7 +19,7 @@ class HotelsController < ApplicationController
 
   def show
     @room = @hotel.rooms.build
-    @rooms = Room.order created_at: :desc
+    @rooms = @hotel.rooms.order created_at: :desc
   end
 
 
