@@ -1,13 +1,15 @@
 class RoomsController < ApplicationController
 
   before_action :find_hotel!
+  # before_action :find_room!
+
   
 
   def update
     @room = @hotel.rooms.find params[:id]
     if @room.update room_params
       flash[:success] = "Room saved"
-      redirect_to hotels_path(@hotel)
+      redirect_to hotel_path(@hotel, anchor: "room-#{@room.id}")
     else
       render :edit
     end
@@ -28,12 +30,13 @@ class RoomsController < ApplicationController
     @room = @hotel.rooms.build room_params
     if @room.save
       flash[:success] = "Room created!"
-      redirect_to hotel_path(@hotel)
+      redirect_to hotel_path(@hotel, anchor: "room-#{@room.id}")
     else
       @rooms = @hotel.rooms.order created_at: :desc
-      render 'hotels/show'
+      render :new
     end
   end
+
 
   def destroy
     @room = @hotel.rooms.find params[:id]
@@ -41,6 +44,7 @@ class RoomsController < ApplicationController
     flash[:success] = "Room deleted!"
     redirect_to hotel_path(@hotel)
   end
+
 
   private
 
