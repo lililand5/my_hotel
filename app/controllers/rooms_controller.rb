@@ -1,5 +1,6 @@
 class RoomsController < ApplicationController
 
+  include ActionView::RecordIdentifier
   before_action :find_hotel!
   # before_action :find_room!
 
@@ -9,7 +10,7 @@ class RoomsController < ApplicationController
     @room = @hotel.rooms.find params[:id]
     if @room.update room_params
       flash[:success] = "Room saved"
-      redirect_to hotel_path(@hotel, anchor: "room-#{@room.id}")
+      redirect_to hotel_path(@hotel, anchor: dom_id(@room))
     else
       render :edit
     end
@@ -32,7 +33,8 @@ class RoomsController < ApplicationController
       flash[:success] = "Room created!"
       redirect_to hotel_path(@hotel, anchor: "room-#{@room.id}")
     else
-      @rooms = @hotel.rooms.order created_at: :desc
+      @pagy, @rooms = pagy @hotel.rooms.order(created_at: :desc)
+      # @rooms = @hotel.rooms.order created_at: :desc
       render :new
     end
   end

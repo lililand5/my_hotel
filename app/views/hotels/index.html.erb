@@ -1,10 +1,11 @@
 <h4>Hotels</h4>
 
-<%= link_to 'Create hotel', new_hotel_path(@deed), class: 'btn btn-primary'%>
-<%= paginate @hotels %>
+<%= link_to 'Create hotel', new_hotel_path(@deed), class: 'btn btn-primary mb-3'%>
+
+<%== pagy_bootstrap_nav @pagy %>
 
 <% @hotels.each do |hotel| %>
-  <article class="card" >
+  <article class="card my-3" >
     <div class="card-body">
       <h4><%= strip_tags hotel.title %></h4>
       <section class="card-text">
@@ -22,4 +23,4 @@
   </article>
 <% end %>
 
-<%= paginate @hotels %>
+<%== pagy_bootstrap_nav @pagy %>
