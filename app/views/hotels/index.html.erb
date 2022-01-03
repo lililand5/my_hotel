@@ -1,17 +1,18 @@
 <h4>Hotels</h4>
 
 <%= link_to 'Create hotel', new_hotel_path(@deed), class: 'btn btn-primary'%>
+<%= paginate @hotels %>
 
 <% @hotels.each do |hotel| %>
-  <article class="card">
+  <article class="card" >
     <div class="card-body">
-      <h4><%= hotel.title %></h4>
+      <h4><%= strip_tags hotel.title %></h4>
       <section class="card-text">
         <p class="my-2"> 
           <%= hotel.stars %> 
         </p>
         <p class="my-2"> 
-          <%= hotel.about_hotel %> 
+          <%= truncate strip_tags(hotel.about_hotel), length: 100 %> 
         </p>
       </section>
       <%= link_to 'Show', hotel_path(hotel), class: 'btn btn-primary'%>
@@ -20,3 +21,5 @@
     </div>
   </article>
 <% end %>
+
+<%= paginate @hotels %>

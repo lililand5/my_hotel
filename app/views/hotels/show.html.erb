@@ -1,15 +1,16 @@
-<h1 ><%= @hotel.title %> </h1>
+<div class="lead my-3"><%= sanitize @hotel.title %></div>
 
-<p> <%= @hotel.stars %> </p>
-<p> <%= @hotel.address %> </p>
-<p> <%= @hotel.link_map %> </p>
-<p> <%= @hotel.pay_one %> </p>
-<p> <%= @hotel.pay_two %> </p>
-<p> <%= @hotel.rating %> </p>
-<p> <%= @hotel.about_hotel %> </p>
-<p> <%= @hotel.services %> </p>
-<p> <%= @hotel.extra %> </p>
-<p> <%= @hotel.contacts %> </p>
+<div class="lead my-3"><%= @hotel.stars %></div>
+<div class="lead my-3"><%= sanitize @hotel.address %></div>
+<div class="lead my-3"><%= sanitize @hotel.link_map %></div>
+<div class="lead my-3"><%= sanitize @hotel.pay_one %></div>
+<div class="lead my-3"><%= sanitize @hotel.pay_two %></div>
+<div class="lead my-3"><%= @hotel.rating %></div>
+<div class="lead my-3"><%= sanitize @hotel.about_hotel %></div>
+<div class="lead my-3"><%= sanitize @hotel.services %></div>
+<div class="lead my-3"><%= sanitize @hotel.extra %></div>
+<div class="lead my-3"><%= sanitize @hotel.contacts %></div>
+
 
 <%= link_to 'Edit', edit_hotel_path(@hotel), class: 'btn btn-secondary' %>
 <%= link_to 'Destroy', hotel_path(@hotel), class: 'btn btn-danger', data: {method: :delete, confirm: 'Are you sure?'} %>
@@ -29,27 +30,11 @@
 
 <h2 class="mt-5">Rooms</h2>
 
-<% @rooms.each do |room| %>
-<article class="mb-3 card" id="room-<%= room.id %>">
-  <div class="card-body">
-    <section class="card-text">
-      <p class="mt-2 mb-3"><%= room.id %></p>
-      <p class="mt-2 mb-3"><%= room.room_type %></p>
-      <p class="mt-2 mb-3"><%= room.link_img %></p>
-      <p class="mt-2 mb-3"><%= room.price_per_night %></p>
-      <p class="mt-2 mb-3"><%= room.bed_type %></p>
-      <p class="mt-2 mb-3"><%= room.number_of_beds %></p>
-      <p class="mt-2 mb-3"><%= room.number_of_people %></p>
-      <p class="mt-2 mb-3"><%= room.booking_type %></p>
-      <p class="mt-2 mb-3"><%= room.food %></p>
-      <p class="mt-2 mb-3"><%= room.comforts %></p>
-    </section>
-    <%=link_to 'Edit', edit_hotel_room_path(@hotel, room), class: 'btn btn-info btn-sm' %>
-    <%=link_to 'Delete', hotel_room_path(@hotel, room), class: 'btn btn-danger btn-sm', data: {method: :delete, confirm: "Are you sure"} %>
-  </div>
-</article>
-<% end %>
+<%= paginate @rooms %>
 
 
+<%= render partial: 'rooms/room', collection: @rooms, as: :room, locals: {hotel: @hotel} %>
+
+<%= paginate @rooms %>
 
 

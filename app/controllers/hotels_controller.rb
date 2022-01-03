@@ -19,7 +19,8 @@ class HotelsController < ApplicationController
 
   def show
     @room = @hotel.rooms.build
-    @rooms = @hotel.rooms.order created_at: :desc
+    @rooms = @hotel.rooms.order(created_at: :desc).page(params[:page]).per(2)
+
   end
 
 
@@ -31,7 +32,7 @@ class HotelsController < ApplicationController
 
 
   def index
-    @hotels = Hotel.all
+    @hotels = Hotel.all.page params[:page]
   end
 
 
@@ -55,7 +56,7 @@ class HotelsController < ApplicationController
   private
 
   def hotel_params
-    params.require(:hotel).permit(:title, :stars)
+    params.require(:hotel).permit(:title, :stars, :address, :link_map, :pay_one, :pay_two, :rating, :about_hotel, :services, :extra, :contacts)
   end
 
 
