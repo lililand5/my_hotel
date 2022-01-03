@@ -1,5 +1,7 @@
 <h4>Hotels</h4>
 
+<%= current_user.inspect %>
+
 <%= link_to 'Create hotel', new_hotel_path(@deed), class: 'btn btn-primary mb-3'%>
 
 <%== pagy_bootstrap_nav @pagy %>
