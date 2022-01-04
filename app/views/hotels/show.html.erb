@@ -1,3 +1,6 @@
+<% provide :page_title, @hotel.title %>
+<% currently_at 'Hotels' %>
+
 <div class="lead my-3"><%= sanitize @hotel.title %></div>
 
 <div class="lead my-3"><%= @hotel.stars %></div>
@@ -28,15 +31,15 @@
 <%= link_to 'Create room', new_hotel_room_path(@hotel), class: 'btn btn-secondary' %>
 
 
-<h2 class="mt-5">Rooms</h2>
+<h2 class="mt-5 mb-3">Rooms</h2>
 
 
-<%== pagy_bootstrap_nav @pagy %>
+<%= pagination @pagy %>
 
 
 <%= render partial: 'rooms/room', collection: @rooms, as: :room, locals: {hotel: @hotel} %>
 
 
-<%== pagy_bootstrap_nav @pagy %>
+<%= pagination @pagy %>
 
 
