@@ -26,6 +26,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'pagy', '~> 4.10'
 gem 'valid_email2', '~> 4.0'
 
+gem 'jquery-rails'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
@@ -44,6 +46,12 @@ group :development do
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   gem 'rack-mini-profiler', '~> 2.0'
+
+  gem 'rubocop', '~> 1.18', require: false
+  gem 'rubocop-rails', '~> 2.11', require: false
+  gem 'rubocop-performance', '~> 1.11', require: false
+
+
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
