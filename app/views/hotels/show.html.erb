@@ -1,42 +1,69 @@
 <% provide :page_title, @hotel.title %>
 <% currently_at 'Hotels' %>
 
+<div class="card my-3">
+  <div class="row g-0">
+    <div class="col-md-6 center-block p-2">
+      <% if @hotel.avatar.attached? %>
+      <%= image_tag @hotel.avatar, width: "100%" %>
+      <% end %>
+    </div>
+    <div class="col-md-6">
+      <div class="card-body">
+        <h3 class="card-title"><%= sanitize @hotel.title %></h3>
 
-<% if @hotel.avatar.attached? %>
-  <%= image_tag @hotel.avatar, width: "200px" %>
-<% end %>
+        <% @hotel.stars.times do %>
+        <i class="fas fa-star" style="color: #ffc107;"></i>
+        <% end %>
+        
+        <p class="card-text">
+          <%= sanitize @hotel.address %>
+        </p>
+        <p class="card-text">
+          <%= sanitize @hotel.pay_one %>
+        
+          <%= sanitize @hotel.pay_two %>
+        </p>
 
-<div class="lead my-3"><%= sanitize @hotel.title %></div>
+        <p class="card-text">
+          <i class="fas fa-thumbs-up"></i>
+          <%= @hotel.rating %>
+        </p>
+        <p class="card-text">
+          <%= sanitize @hotel.about_hotel %>
+        </p>
+        <p class="card-text">
+          <%= sanitize @hotel.services %>
+        </p>
+        <p class="card-text">
+          <%= sanitize @hotel.extra %>
+        </p>
+        <p class="card-text">
+          <small class="text-muted">
+            <%= sanitize @hotel.contacts %>
+          </small>
+        </p>
+        
 
-<div class="lead my-3"><%= @hotel.stars %></div>
-<div class="lead my-3"><%= sanitize @hotel.address %></div>
-<div class="lead my-3"><%= sanitize @hotel.link_map %></div>
-<div class="lead my-3"><%= sanitize @hotel.pay_one %></div>
-<div class="lead my-3"><%= sanitize @hotel.pay_two %></div>
-<div class="lead my-3"><%= @hotel.rating %></div>
-<div class="lead my-3"><%= sanitize @hotel.about_hotel %></div>
-<div class="lead my-3"><%= sanitize @hotel.services %></div>
-<div class="lead my-3"><%= sanitize @hotel.extra %></div>
-<div class="lead my-3"><%= sanitize @hotel.contacts %></div>
-
-
-<%= link_to 'Edit', edit_hotel_path(@hotel), class: 'btn btn-secondary' %>
-<%= link_to 'Destroy', hotel_path(@hotel), class: 'btn btn-danger', data: {method: :delete, confirm: 'Are you sure?'} %>
+        <%= link_to 'Edit', edit_hotel_path(@hotel), class: 'btn btn-warning' %>
+        <%= link_to 'Destroy', hotel_path(@hotel), class: 'btn btn-danger', data: {method: :delete, confirm: 'Are you sure?'} %>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
 <hr class="my-3">
 
-<!--<%= @room.inspect %>-->
 
-<h2>Add room</h2>
 
 <%= render 'shared/errors', object: @room %>
 
-<%= link_to 'Create room', new_hotel_room_path(@hotel), class: 'btn btn-secondary' %>
 
 
-<h2 class="mt-5 mb-3">Rooms</h2>
+
+<h2 class="mt-5 mb-3">Rooms <%= link_to 'Create room', new_hotel_room_path(@hotel), class: 'btn btn-secondary btn-sm' %></h2>
 
 
 <%= pagination @pagy %>

@@ -1,36 +1,52 @@
 <% provide :page_title, 'Hotels' %>
 <% currently_at 'Hotels' %>
 
-<h4>Hotels</h4>
+<div class="row mb-3">
+  <div class="col-12">
+    <h1>All hotels
+      <%= link_to 'Create', new_hotel_path(@deed), class: 'btn btn-primary btn-sm'%>
+      
+    </h1>
+  </div>
+</div>
 
-
-
-<%= link_to 'Create hotel', new_hotel_path(@deed), class: 'btn btn-primary mb-3'%>
 
 <%= pagination @pagy %>
 
 <% @hotels.each do |hotel| %>
-<article class="card my-3" >
-  <div class="card-body">
-
-    <% if hotel.avatar.attached? %>
-    <%= image_tag hotel.avatar, width: "200px" %>
-    <% end %>
-    
-    <h4><%= strip_tags hotel.title %></h4>
-    <section class="card-text">
-      <p class="my-2"> 
-        <%= hotel.stars %> 
-      </p>
-      <p class="my-2"> 
-        <%= truncate strip_tags(hotel.about_hotel), length: 100 %> 
-      </p>
-    </section>
-    <%= link_to 'Show', hotel_path(hotel), class: 'btn btn-primary'%>
-    <%= link_to 'Edit', edit_hotel_path(hotel), class: 'btn btn-secondary' %>
-    <%= link_to 'Destroy', hotel_path(hotel), class: 'btn btn-danger', data: {method: :delete, confirm: 'Are you sure?'} %>
+<div class="card my-3">
+  <div class="row g-0">
+    <div class="col-md-4 center-block p-2">
+      <% if hotel.avatar.attached? %>
+      <%= image_tag hotel.avatar, width: "100%" %>
+      <% end %>
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title"><%= strip_tags hotel.title %></h5>
+        
+        <p class="card-text">
+          <% hotel.stars.times do %>
+          <i class="fas fa-star" style="color: #ffc107;"></i>
+          <% end %>
+          <i class="fas fa-thumbs-up"></i>
+          <%= hotel.rating %>
+        </p>
+        <p class="card-text">
+          <%= truncate strip_tags(hotel.about_hotel), length: 100 %>
+        </p>
+        <p class="card-text">
+          <small class="text-muted">
+            <%= truncate strip_tags(hotel.services), length: 50 %>
+          </small>
+        </p>
+        <%= link_to 'Show', hotel_path(hotel), class: 'btn btn-primary'%>
+        <%= link_to 'Edit', edit_hotel_path(hotel), class: 'btn btn-warning' %>
+        <%= link_to 'Destroy', hotel_path(hotel), class: 'btn btn-danger', data: {method: :delete, confirm: 'Are you sure?'} %>
+      </div>
+    </div>
   </div>
-</article>
+</div>
 <% end %>
 
 <%= pagination @pagy %>

@@ -32,6 +32,8 @@ gem 'mini_magick', '~> 4.8'
 
 gem 'lightbox2-rails'
 
+gem 'font-awesome-sass'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
