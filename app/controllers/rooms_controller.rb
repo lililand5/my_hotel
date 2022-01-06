@@ -40,6 +40,11 @@ class RoomsController < ApplicationController
   end
 
 
+  def show
+    @room = @hotel.rooms.find params[:id]
+  end
+
+
   def destroy
     @room = @hotel.rooms.find params[:id]
     @room.destroy
@@ -51,7 +56,7 @@ class RoomsController < ApplicationController
   private
 
   def room_params
-    params.require(:room).permit(:price_per_night, :room_type, :link_img, :bed_type, :number_of_people, :booking_type, :number_of_beds, :food, :comforts)
+    params.require(:room).permit(:price_per_night, :room_type, :link_img, :bed_type, :number_of_people, :booking_type, :number_of_beds, :food, :comforts, images: [])
   end
 
   def find_hotel!

@@ -28,6 +28,10 @@ gem 'valid_email2', '~> 4.0'
 
 gem 'jquery-rails'
 
+gem 'mini_magick', '~> 4.8'
+
+gem 'lightbox2-rails'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

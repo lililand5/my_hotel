@@ -1,6 +1,11 @@
 <% provide :page_title, @hotel.title %>
 <% currently_at 'Hotels' %>
 
+
+<% if @hotel.avatar.attached? %>
+  <%= image_tag @hotel.avatar, width: "200px" %>
+<% end %>
+
 <div class="lead my-3"><%= sanitize @hotel.title %></div>
 
 <div class="lead my-3"><%= @hotel.stars %></div>

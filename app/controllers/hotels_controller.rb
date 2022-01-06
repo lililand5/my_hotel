@@ -3,6 +3,14 @@ class HotelsController < ApplicationController
   before_action :find_hotel!, only: %i[show destroy edit update]
 
 
+  def purge_avatar
+    @hotel = Hotel.find params[:id]
+    @hotel.avatar.purge
+    flash[:success] = "Picture deleted!"
+    redirect_back fallback_location: root_path
+  end
+
+
   def edit
   end
 
@@ -10,7 +18,7 @@ class HotelsController < ApplicationController
   def update
     if @hotel.update hotel_params
       flash[:success] = "Hotel saved"
-      redirect_to hotels_path
+      redirect_to hotel_path
     else
       render :edit
     end
@@ -58,7 +66,7 @@ class HotelsController < ApplicationController
   private
 
   def hotel_params
-    params.require(:hotel).permit(:title, :stars, :address, :link_map, :pay_one, :pay_two, :rating, :about_hotel, :services, :extra, :contacts)
+    params.require(:hotel).permit(:title, :stars, :address, :link_map, :pay_one, :pay_two, :rating, :about_hotel, :services, :extra, :contacts, :avatar)
   end
 
 
