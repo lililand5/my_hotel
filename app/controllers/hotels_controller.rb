@@ -2,6 +2,10 @@ class HotelsController < ApplicationController
 
   before_action :find_hotel!, only: %i[show destroy edit update]
 
+  before_action :authenticate_user!, only: %i[:show, :index]
+
+  # before_filter :authenticate_user!
+
 
   def purge_avatar
     @hotel = Hotel.find params[:id]
@@ -22,7 +26,7 @@ class HotelsController < ApplicationController
     else
       render :edit
     end
-  end
+  end 
 
 
   def show
@@ -36,7 +40,8 @@ class HotelsController < ApplicationController
   def destroy
     @hotel.destroy
     flash[:success] = "Hotel deleted!"
-    redirect_to hotels_path
+    # redirect_to hotels_path
+    render :index
   end
 
 

@@ -1,66 +1,66 @@
 module Authentication
 
-  extend ActiveSupport::Concern
+  # extend ActiveSupport::Concern
 
-  included do
+  # included do
 
-    private
+  #   private
 
-    def current_user
-      if session[:user_id].present?
-        @current_user ||= User.find_by(id: session[:user_id]) 
-      elsif cookies.encrypted[:user_id].present?
-        user = User.find_by(id: cookies.encrypted[:user_id])
-        if user&.remember_token_authenticated?(cookies.encrypted[:remember_token])
-          sign_in user
-          @current_user ||= user
-        end
-      end
-    end
+  #   def current_user
+  #     if session[:user_id].present?
+  #       @current_user ||= User.find_by(id: session[:user_id]) 
+  #     elsif cookies.encrypted[:user_id].present?
+  #       user = User.find_by(id: cookies.encrypted[:user_id])
+  #       if user&.remember_token_authenticated?(cookies.encrypted[:remember_token])
+  #         sign_in user
+  #         @current_user ||= user
+  #       end
+  #     end
+  #   end
 
-    def user_signed_in?
-      current_user.present?
-    end
-
-
-    def require_authentication
-      return if user_signed_in?
-
-      flash[:warning] = "You are not signed in"
-      redirect_to root_path
-    end
+  #   def user_signed_in?
+  #     current_user.present?
+  #   end
 
 
-    def require_no_authentication
-      return if !user_signed_in?
+  #   def require_authentication
+  #     return if user_signed_in?
 
-      flash[:warning] = "You are already signed in"
-      redirect_to root_path
-    end
+  #     flash[:warning] = "You are not signed in"
+  #     redirect_to root_path
+  #   end
 
-    def sign_in(user)
-      session[:user_id] = user.id
-    end
 
-    def remember(user)
-      user.remember_me
-      cookies.encrypted.permanent[:remember_token] = user.remember_token
-      cookies.encrypted.permanent[:user_id] = user.id
-    end
+  #   def require_no_authentication
+  #     return if !user_signed_in?
 
-    def forget(user)
-      user.forget_me
-      cookies.delete :user_id
-      cookies.delete :remember_token
-    end
+  #     flash[:warning] = "You are already signed in"
+  #     redirect_to root_path
+  #   end
 
-    def sign_out
-      forget current_user
-      session.delete :user_id
-      @current_user = nil
-    end
+  #   def sign_in(user)
+  #     session[:user_id] = user.id
+  #   end
 
-    helper_method :current_user, :user_signed_in?
+  #   def remember(user)
+  #     user.remember_me
+  #     cookies.encrypted.permanent[:remember_token] = user.remember_token
+  #     cookies.encrypted.permanent[:user_id] = user.id
+  #   end
 
-  end
+  #   def forget(user)
+  #     user.forget_me
+  #     cookies.delete :user_id
+  #     cookies.delete :remember_token
+  #   end
+
+  #   def sign_out
+  #     forget current_user
+  #     session.delete :user_id
+  #     @current_user = nil
+  #   end
+
+  #   helper_method :current_user, :user_signed_in?
+
+  # end
 end

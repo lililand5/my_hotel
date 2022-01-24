@@ -34,6 +34,8 @@ gem 'lightbox2-rails'
 
 gem 'font-awesome-sass'
 
+gem 'devise'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
